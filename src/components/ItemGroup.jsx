@@ -30,25 +30,27 @@ export default function ItemGroup({ group, selectedCount }) {
       </div>
 
       {isOpen && group.options.length > 0 && (
-        <>
-          <div className="grid grid-cols-[60px_120px_120px_1fr_80px_80px] gap-4 text-sm font-semibold text-gray-700 border-b py-2 mt-3">
-            <div>Option</div>
-            <div>Term</div>
-            <div>Billing</div>
-            <div>Licence</div>
-            <div className="text-right">Price</div>
-            <div></div>
+        <div className="pt-4 w-full flex justify-center bg-blue-100">
+          <div className="w-full max-w-[1000px] px-6 border border-gray-200 rounded-md shadow-sm">
+            <div className="grid grid-cols-[60px_120px_120px_1fr_80px_80px] gap-4 text-sm font-semibold text-gray-700 border-b py-2">
+              <div>Option</div>
+              <div>Term</div>
+              <div>Billing</div>
+              <div>Licence</div>
+              <div className="text-right">Price</div>
+              <div></div>
+            </div>
+            {group.options.map((opt, idx) => (
+              <AddonTableRow
+                key={opt.id}
+                index={idx}
+                groupId={group.id}
+                option={opt}
+                isLast={idx === group.options.length - 1}
+              />
+            ))}
           </div>
-          {group.options.map((opt, idx) => (
-            <AddonTableRow
-              key={opt.id}
-              index={idx}
-              groupId={group.id}
-              option={opt}
-              isLast={idx === group.options.length - 1}
-            />
-          ))}
-        </>
+        </div>
       )}
     </div>
   );
