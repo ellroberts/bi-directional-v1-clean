@@ -8,26 +8,32 @@ export default function ItemGroup({ group, selectedCount }) {
   return (
     <div className="border-b pb-4 mb-6">
       <div
-        className="flex justify-between items-center cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className="flex items-center gap-2">
-          {isOpen ? (
-            <FaChevronDown className="text-sm" />
-          ) : (
-            <FaChevronRight className="text-sm" />
-          )}
-          <div className="font-semibold">{group.name}</div>
-        </div>
-        <div className="text-sm text-gray-500">
-          {group.options.length} options available
-        </div>
-        {selectedCount > 0 && (
-          <div className="text-sm font-semibold text-black ml-4">
-            {selectedCount} selected
-          </div>
-        )}
-      </div>
+  className="flex justify-between items-start cursor-pointer"
+  onClick={() => setIsOpen(!isOpen)}
+>
+  {/* LEFT SIDE: Title and options available stacked */}
+  <div>
+    <div className="flex items-center gap-2">
+      {isOpen ? (
+        <FaChevronDown className="text-sm" />
+      ) : (
+        <FaChevronRight className="text-sm" />
+      )}
+      <div className="font-semibold">{group.name}</div>
+    </div>
+    <div className="text-sm text-gray-500 mt-1 ml-5">
+      {group.options.length} options available
+    </div>
+  </div>
+
+  {/* RIGHT SIDE: selected count (unchanged) */}
+  {selectedCount > 0 && (
+    <div className="text-sm font-semibold text-black ml-4">
+      {selectedCount} selected
+    </div>
+  )}
+</div>
+
 
       {isOpen && group.options.length > 0 && (
         <div className="pt-4 w-full flex justify-center bg-blue-100">

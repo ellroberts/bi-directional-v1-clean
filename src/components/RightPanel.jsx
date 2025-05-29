@@ -7,23 +7,132 @@ export default function RightPanel() {
 
   return (
     <div>
-      <h2 className="text-lg font-bold mb-4">Title</h2>
+      <h2 style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem" }}>Title</h2>
       {Object.entries(selected).map(([groupId, options]) =>
         Object.entries(options).map(([optionId, opt]) => (
-          <div key={optionId} className="mb-6 border-b pb-4">
-            <h3 className="font-semibold text-sm mb-1">{opt.name || groupId}</h3>
-            <div className="text-sm text-gray-700">{`Option ${optionId} £${opt.price}`}</div>
-            <div className="text-sm text-gray-500 mb-1">{`${opt.term} / ${opt.billing}`}</div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => addOrUpdate(groupId, optionId, { ...opt, qty: Math.max(0, opt.qty - 1) })}>−</button>
-              <span>{opt.qty}</span>
-              <button onClick={() => addOrUpdate(groupId, optionId, { ...opt, qty: opt.qty + 1 })}>+</button>
+          <div
+            key={optionId}
+            style={{
+              marginBottom: "1.5rem",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "1rem"
+            }}
+          >
+            <h3
+              style={{
+                fontWeight: "600",
+                fontSize: "0.875rem",
+                marginBottom: "0.25rem"
+              }}
+            >
+              {opt.name || groupId}
+            </h3>
+
+            <div style={{ fontSize: "0.875rem", color: "#000" }}>
+              Option {optionId} £{opt.price}
+            </div>
+
+            <div
+              style={{
+                fontSize: "0.875rem",
+                color: "#6B7280",
+                marginBottom: "0.25rem"
+              }}
+            >
+              {opt.term} / {opt.billing}
+            </div>
+
+            {/* License Control */}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  height: "32px",
+                  border: "1px solid #000",
+                  borderRadius: "4px",
+                  overflow: "hidden"
+                }}
+              >
+                <button
+                  onClick={() =>
+                    addOrUpdate(groupId, optionId, {
+                      ...opt,
+                      qty: Math.max(0, opt.qty - 1)
+                    })
+                  }
+                  style={{
+                    padding: "0 10px",
+                    fontSize: "14px",
+                    height: "100%",
+                    borderRight: "1px solid #000",
+                    backgroundColor: "white",
+                    cursor: "pointer"
+                  }}
+                >
+                  −
+                </button>
+                <input
+  type="text"
+  inputMode="numeric"
+  pattern="[0-9]*"
+  value={opt.qty}
+  onChange={(e) =>
+    addOrUpdate(groupId, optionId, {
+      ...opt,
+      qty: Math.max(0, parseInt(e.target.value) || 0),
+    })
+  }
+  style={{
+    width: "48px",
+    height: "100%",
+    textAlign: "center",
+    border: "none",
+    outline: "none",
+    fontSize: "14px",
+    backgroundColor: "white"
+  }}
+/>
+                <button
+                  onClick={() =>
+                    addOrUpdate(groupId, optionId, {
+                      ...opt,
+                      qty: opt.qty + 1
+                    })
+                  }
+                  style={{
+                    padding: "0 10px",
+                    fontSize: "14px",
+                    height: "100%",
+                    borderLeft: "1px solid #000",
+                    backgroundColor: "white",
+                    cursor: "pointer"
+                  }}
+                >
+                  +
+                </button>
+              </div>
+
+              {/* Min 10 */}
+              {opt.qty >= 10 && (
+                <span style={{ fontSize: "12px", color: "#6B7280" }}>Min 10</span>
+              )}
+
+              {/* Trash button */}
               <button
-                className="ml-auto flex items-center justify-center text-sm px-4 py-2.5 rounded-md"
+                style={{
+                  marginLeft: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "4px 12px",
+                  borderRadius: "6px",
+                  cursor: "pointer"
+                }}
                 onClick={() => remove(groupId, optionId)}
                 title="Remove"
               >
-                <FaTrash className="text-red-500 text-sm" />
+                <FaTrash style={{ color: "#EF4444", fontSize: "0.875rem" }} />
               </button>
             </div>
           </div>
