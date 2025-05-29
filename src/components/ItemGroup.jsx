@@ -1,40 +1,54 @@
 import React, { useState } from "react";
-import OptionRow from "./OptionRow";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
+import AddonTableRow from "./AddonTableRow";
 
 export default function ItemGroup({ group, selectedCount }) {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b py-4">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex justify-between items-start text-left"
+    <div className="border-b pb-4 mb-6">
+      <div
+        className="flex justify-between items-center cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex gap-2">
-          <div className="pt-1">
-            {open ? (
-              <FaChevronDown className="text-gray-500" />
-            ) : (
-              <FaChevronRight className="text-gray-500" />
-            )}
-          </div>
-          <div>
-            <div className="font-medium">{group.name}</div>
-            <div className="text-sm text-gray-500">{`${group.options.length} options available`}</div>
-          </div>
+        <div className="flex items-center gap-2">
+          {isOpen ? (
+            <FaChevronDown className="text-sm" />
+          ) : (
+            <FaChevronRight className="text-sm" />
+          )}
+          <div className="font-semibold">{group.name}</div>
+        </div>
+        <div className="text-sm text-gray-500">
+          {group.options.length} options available
         </div>
         {selectedCount > 0 && (
-          <span className="text-sm font-semibold text-black pt-1">{`${selectedCount} selected`}</span>
+          <div className="text-sm font-semibold text-black ml-4">
+            {selectedCount} selected
+          </div>
         )}
-      </button>
+      </div>
 
-      {open && (
-        <div className="mt-3 pl-7">
-          {group.options.map((opt) => (
-            <OptionRow key={opt.id} groupId={group.id} option={opt} />
+      {isOpen && group.options.length > 0 && (
+        <>
+          <div className="grid grid-cols-[60px_120px_120px_1fr_80px_80px] gap-4 text-sm font-semibold text-gray-700 border-b py-2 mt-3">
+            <div>Option</div>
+            <div>Term</div>
+            <div>Billing</div>
+            <div>Licence</div>
+            <div className="text-right">Price</div>
+            <div></div>
+          </div>
+          {group.options.map((opt, idx) => (
+            <AddonTableRow
+              key={opt.id}
+              index={idx}
+              groupId={group.id}
+              option={opt}
+              isLast={idx === group.options.length - 1}
+            />
           ))}
-        </div>
+        </>
       )}
     </div>
   );
