@@ -26,7 +26,7 @@ export default function OptionRow({ groupId, option }) {
   };
 
   return (
-    <div className="flex items-center gap-2 my-2">
+    <div className="bg-purple-200 flex items-center gap-2 my-2">
       <div className="flex gap-2 items-center border px-2 py-1 rounded">
         <button onClick={() => handleUpdate(Math.max(0, qty - 1))}>−</button>
         <span>{qty}</span>
@@ -35,7 +35,7 @@ export default function OptionRow({ groupId, option }) {
       <span>£{option.price}</span>
       {current ? (
         <button
-          className="w-[64px] ml-auto flex items-center justify-center text-sm px-4 py-2 rounded-md border border-gray-300 bg-white"
+          className="bg-purple-200 w-[64px] ml-auto flex items-center justify-center text-sm px-4 py-2 rounded-md border border-gray-300 bg-white"
           onClick={() => handleUpdate(0)}
           title="Remove"
         >
@@ -43,7 +43,7 @@ export default function OptionRow({ groupId, option }) {
         </button>
       ) : (
         <button
-          className="w-[64px] ml-auto text-sm text-white px-4 py-2 rounded-md"
+          className="bg-purple-200 w-[64px] ml-auto text-sm text-white px-4 py-2 rounded-md"
           style={{ backgroundColor: '#A34796' }}
           onClick={() => handleUpdate(option.min || 1)}
         >
