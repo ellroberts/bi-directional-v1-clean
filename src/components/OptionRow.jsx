@@ -36,7 +36,7 @@ export default function OptionRow({ groupId, option }) {
       <div className="flex items-center space-x-2">
         <button
           onClick={() => handleUpdate(Math.max(0, qty - 1))}
-          className="bg-blue-500 px-3 py-1 text-sm font-medium bg-gray-200 rounded hover:bg-gray-500"
+          className="bg-green-500 px-3 py-1 text-sm font-medium bg-gray-200 rounded hover:bg-gray-500"
         >
           –
         </button>
