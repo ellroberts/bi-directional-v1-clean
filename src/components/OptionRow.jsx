@@ -43,7 +43,7 @@ export default function OptionRow({ groupId, option }) {
         <span className="px-3 text-sm font-semibold">{qty}</span>
         <button
           onClick={() => handleUpdate(qty + 1)}
-          className="bg-purple-200 px-3 py-1 text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
+          className="px-3 py-1 text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
         >
           +
         </button>
